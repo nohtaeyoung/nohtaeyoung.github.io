@@ -1,10 +1,10 @@
 # --- Basic options --- #
 
 # [수정필요] 웹페이지 이름
-title: PhD. Taeyoung Noh
+title: Taeyoung Noh
 
 # [수정필요] 간단한 사이트 설명
-description: Acedemic Website of Seokho Son
+description: Website of Taeyoung
 
 # [수정필요] 웹페이지 아래에 나오는 웹사이트 저자 이름
 author: Taeyoung Noh
@@ -16,7 +16,7 @@ navbar-links:
   Publication: "publication"
   Blog: "blog"
   Project: "project"
-  GitHub: "https://github.com/seokho-son"
+  GitHub: "https://github.com/nohtaeyoung"
   Google Scholar: "https://scholar.google.com/citations?user=seokhoson"
 
 
