@@ -13,11 +13,11 @@ author: Taeyoung Noh
 # 예를 들어 ETRI 라는 항목을 네비게이션 바에 추가하고 싶은 경우, etri.md 파일 생성 후 ETRI: "etri" 라고 지정.
 navbar-links:
   Career: "career"
-  Publication: "publication"
+  #Publication: "publication"
   Blog: "blog"
   Project: "project"
   GitHub: "https://github.com/nohtaeyoung"
-  Google Scholar: "https://scholar.google.com/citations?user=seokhoson"
+  #Google Scholar: "https://scholar.google.com/citations?user=seokhoson"
 
 
 # [수정필요] 아바타 로고 사용 시에는 이미지 파일을 지정 (이미지 파일 업로드 후, 위치 지정)
@@ -37,9 +37,9 @@ round-avatar: true
 # If you don't want to show a link to an RSS feed, set rss to "false".
 social-network-links:
   email: shxodud37@naver.com
-  facebook: seokho.son.korea
-  github: seokho-son
-  linkedin: seokho-son
+  #facebook: seokho.son.korea
+  github: taeyoung-noh
+  #linkedin: seokho-son
 #  twitter: daattali
 #  rss: true
 #  reddit: yourname
@@ -56,14 +56,16 @@ social-network-links:
 #  telegram: yourname
 #  calendly: yourname
 #  mastodon: instance.url/@username
+instatagram: infosec_oh_nohoooooo_tae_young
 
 # [수정필요] 연락을 위한 타 사이트 정보 활성화 여부 지정 (필요 없는 경우 주석 처리)
 # --- General options --- #
 # Select which social network share links to show in posts
 share-links-active:
 #  twitter: true
-  facebook: true
-  linkedin: true
+  #facebook: true
+  #linkedin: true
+  instagram: true
 #  vk: false
 
 # How to display the link to your website in the footer
