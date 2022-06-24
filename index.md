@@ -2,9 +2,9 @@
 layout: page
 title: Cyber Security
 subtitle: 정보보안 블로그
-cover-img: /assets/img/itu-seokho-m4.jpg
+cover-img: /assets/img/codingimage.jpg
 ---
-
+<--
 <br/>
 
 ## About me
@@ -27,3 +27,4 @@ Affiliation: Cloud Computing SW Research Section, Future Computing Research Divi
 Office: ETRI 7-563, 218, Gajeong-ro, Yuseong-gu, Daejeon, Republic of Korea
 Email: shsonkorea[at]etri.re.kr or shsongist[at]gmail.com
 ```
+!-->
