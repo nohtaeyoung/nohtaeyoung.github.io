@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Cloud Researcher
-subtitle: Artificial Intelligence Research Laboratory, ETRI
+title: Cyber Security
+subtitle: 정보보안 블로그
 cover-img: /assets/img/itu-seokho-m4.jpg
 ---
 
