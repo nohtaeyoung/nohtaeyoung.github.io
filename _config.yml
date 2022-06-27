@@ -37,8 +37,9 @@ round-avatar: true
 # If you don't want to show a link to an RSS feed, set rss to "false".
 social-network-links:
   email: shxodud37@naver.com
-  #facebook: seokho.son.korea
+  facebook: seokho.son.korea
   github: https://github.com/nohtaeyoung
+  Instagram: infosec_oh_nohoooooo_tae_young
   #linkedin: seokho-son
 #  twitter: daattali
 #  rss: true
@@ -56,7 +57,7 @@ social-network-links:
 #  telegram: yourname
 #  calendly: yourname
 #  mastodon: instance.url/@username
-  Instagram: infosec_oh_nohoooooo_tae_young
+  
 
 # [수정필요] 연락을 위한 타 사이트 정보 활성화 여부 지정 (필요 없는 경우 주석 처리)
 # --- General options --- #
@@ -65,7 +66,7 @@ share-links-active:
 #  twitter: true
   #facebook: true
   #linkedin: true
-  instagram: true
+  Instagram: true
 #  vk: false
 
 # How to display the link to your website in the footer
