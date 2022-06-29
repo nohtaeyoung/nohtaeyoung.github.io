@@ -78,21 +78,27 @@ comments: true
 - fdisk /dev/sdb 입력
 
 ![fdisk 예 3](../assets/img/fdisk 예 3.png)
+
 - 1번 파티션에  주 파티션 생성
 
 ![fdisk 예 3-1](../assets/img/fdisk 예 3-1.png)
+
 - 2번 파티션에 확장 파티션 생성
 
 ![fdisk 예 3-2](../assets/img/fdisk 예 3-2.png)
+
 - 확장 파티션에 논리 파티션 생성(2GB)
 
 ![fdisk 예 3-3](../assets/img/fdisk 예 3-3.png)
+
 - 파티션 정보 확인
 
 ![fdisk 예 3-4](../assets/img/fdisk 예 3-4.png)
+
 - 파티션 타입 변경(5번 파티션을 Swap 타입으로 설정
  
 ![fdisk 예 3-5](../assets/img/fdisk 예 3-5.png)
+
 -설정 정보 저장 후 디스크 관리모드 종료
 
 ![fdisk 예 3-6](../assets/img/fdisk 예 3-6.png)
@@ -166,6 +172,7 @@ noatime: access time을 기록하지 않음, 자주 파일에 엑세스 할 경�
 ## fstab 확인
 - cat /etc/fstab
 -  ①UUID=ec78d766-639a-4c6e-80a5-627449f11768 ②/ ③ext4 ④defaults ⑤1 ⑥1
+
 ![fstab 예 2](../assets/img/fstab 예 2.png)
 
 ## UUID(Universally Unique IDentifier)
