@@ -61,6 +61,7 @@ comments: true
 
 ## fdisk 예 파티션 설정
 - fdisk 관리 모드 설정 명령
+
   {: .box-note}
   a: 부팅 파티션을 설정
   d: 파티션 삭제
@@ -91,6 +92,7 @@ comments: true
 - 파일 시스템 생성 명령어
 ## 사용법 및 옵션
 - # mkfs [옵션] [장치 이름]
+
 {: .box-note}
 -t[종류]: 파일 시스템의 종류 선택
 -c: 파일 시스템을 생성하기 전에 bad block을 검사 함
@@ -112,6 +114,8 @@ comments: true
 
 ## 사용법 및 옵션
 - # mount [-t 파일시스템 유형][-o 옵션][장치 이름][마운트 포인트]
+
+{: .box-note}
 async: 마운트된 파일시스템에 비 동기 입출력을 사용
 auto: /etc/fstab에 지정된 파일시스템에 대해 부팅 시에 자동으로 마운트 
 defaults: rw,suid,dev,exec,auto, nouser, async를 종합적으로 사용
