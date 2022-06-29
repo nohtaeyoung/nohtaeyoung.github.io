@@ -25,7 +25,7 @@ comments: true
 
 - 디스크 용량을 MB(Mega Byte) 단위로 표시
 
-![df 예 -h](../assets/img/simple-guide.gif)
+![df 예 -h](../assets/img/df 예 -h.png)
 
 
 ## du
@@ -36,12 +36,12 @@ comments: true
 ## du 예1 -sh [디렉토리]
 - 디렉토리 전체 사용량 확인
 
-![du 예 1](../assets/img/simple-guide.gif)
+![du 예 1](../assets/img/du 예 1.png)
 
 ## du 예 -sh [디렉토리]/*
 - 개별 디렉토리 사용량 확인
 
-![du 예 2](../assets/img/simple-guide.gif)
+![du 예 2](../assets/img/du 예 2.png)
 
 ## fdisk
 - file system disk
@@ -49,7 +49,7 @@ comments: true
 
 ## fdisk 예 -l
 - 현재 파일 시스템의 파티션 정보를 확인 하고 싶을 때
-![fdisk 예 1](../assets/img/simple-guide.gif)
+![fdisk 예 1](../assets/img/fdisk 예 1.png)
 
 ## fdisk 예 디스크 추가 확인
 - 일단 사용중인 시스템을 종료  합니다.
@@ -57,7 +57,7 @@ comments: true
 - 하단에 add를 클릭한다.
 - Hard Disk를 클릭하고 Next -> SCSI -> Create a new virtual disk-> 40G 바꾸고 하단에 Store virtual disk as a single file -> finish -> OK
 - 리눅스 시스템 로그인 후 시스템의 파티션 테이블을 확인 한다.(fdisk -l)
-![fdisk 예 2](../assets/img/simple-guide.gif)
+![fdisk 예 2](../assets/img/fdisk 예 2.png)
 
 ## fdisk 예 파티션 설정
 - fdisk 관리 모드 설정 명령
@@ -74,19 +74,19 @@ comments: true
   w: 작업 내용 저장
 
 - fdisk /dev/sdb 입력
-![fdisk 예 3](../assets/img/simple-guide.gif)
+![fdisk 예 3](../assets/img/fdisk 예 3.png)
 - 1번 파티션에  주 파티션 생성
-![fdisk 예 3-1](../assets/img/simple-guide.gif)
+![fdisk 예 3-1](../assets/img/fdisk 예 3-1.png)
 - 2번 파티션에 확장 파티션 생성
-![fdisk 예 3-2](../assets/img/simple-guide.gif)
+![fdisk 예 3-2](../assets/img/fdisk 예 3-2.png)
 - 확장 파티션에 논리 파티션 생성(2GB)
-![fdisk 예 3-3](../assets/img/simple-guide.gif)
+![fdisk 예 3-3](../assets/img/fdisk 예 3-3.png)
 - 파티션 정보 확인
-![fdisk 예 3-4](../assets/img/simple-guide.gif)
+![fdisk 예 3-4](../assets/img/fdisk 예 3-4.png)
 - 파티션 타입 변경(5번 파티션을 Swap 타입으로 설정
-![fdisk 예 3-5](../assets/img/simple-guide.gif)
+![fdisk 예 3-5](../assets/img/fdisk 예 3-5.png)
 -설정 정보 저장 후 디스크 관리모드 종료
-![fdisk 예 3-6](../assets/img/simple-guide.gif)
+![fdisk 예 3-6](../assets/img/fdisk 예 3-6.png)
 
 ## mkfs
 - 파일 시스템 생성 명령어
@@ -99,7 +99,7 @@ comments: true
 -v: 작업 상태와 결과를 자세히 출력 함<br>
 
 - 파일 시스템 생성(/dev/sdb1 장치에 ext4 파일 시스템 생성)
-![file system 예 1](../assets/img/simple-guide.gif)
+![file system 예 1](../assets/img/file system 예 1.png)
 
 ## 마운트(Mount)
 - 운영체제가 물리적인 장치를 이용할 수 있도록 연결 한다.
@@ -141,7 +141,7 @@ noatime: access time을 기록하지 않음, 자주 파일에 엑세스 할 경�
 - umount [마운트 포인터]
 
 ## 파일 시스템 언마운트 예
-![umount 예 1](../assets/img/simple-guide.gif)
+![umount 예 1](../assets/img/umount 예 1)
 
 ## 파일 시스템 마운트 관리 파일(/etc/fstab)
 - 리눅스가 부팅되면서 파일 시스템을 어디에 자동으로 마운트하고, 외부 장치들에 대한 마운트를 어떻게 설
@@ -150,12 +150,12 @@ noatime: access time을 기록하지 않음, 자주 파일에 엑세스 할 경�
 어 짐
 
 ## 예시
-![fstab 예 1](../assets/img/simple-guide.gif)
+![fstab 예 1](../assets/img/fstab 예 1.png)
 
 ## fstab 확인
 - cat /etc/fstab
 -  ①UUID=ec78d766-639a-4c6e-80a5-627449f11768 ②/ ③ext4 ④defaults ⑤1 ⑥1
-![fstab 예 2](../assets/img/simple-guide.gif)
+![fstab 예 2](../assets/img/fstab 예 2.png)
 
 ## UUID(Universally Unique IDentifier)
 - 16Byte(128Bit)로 이루어진 규격화된 숫자이다.
@@ -164,9 +164,9 @@ noatime: access time을 기록하지 않음, 자주 파일에 엑세스 할 경�
 
 ## UUID 확인
 - blkid
-![uuid 예 1](../assets/img/simple-guide.gif)
+![uuid 예 1](../assets/img/uuid 예 1.png)
 
-## Disk 최종 실습
+## Disk 최종 실습(개인적으로 풀어보기)
 - 20GB 크기를 가진 하드디스크 추가 장착
 - 1번 파티션은 기본 파티션으로 8GB 용량으로 분할
 - 2번 파티션은 확장 파티션으로 12GB 용량으로 분할 후 4GB를 가지는 논리 파티션 추가
