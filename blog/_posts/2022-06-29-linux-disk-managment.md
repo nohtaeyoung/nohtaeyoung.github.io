@@ -76,27 +76,27 @@ comments: true
 - fdisk /dev/sdb 입력
 ![fdisk 예 3](../assets/img/simple-guide.gif)
 - 1번 파티션에  주 파티션 생성
-![fdisk 예 2-1](../assets/img/simple-guide.gif)
+![fdisk 예 3-1](../assets/img/simple-guide.gif)
 - 2번 파티션에 확장 파티션 생성
-![fdisk 예 2-2](../assets/img/simple-guide.gif)
+![fdisk 예 3-2](../assets/img/simple-guide.gif)
 - 확장 파티션에 논리 파티션 생성(2GB)
-![fdisk 예 2-3](../assets/img/simple-guide.gif)
+![fdisk 예 3-3](../assets/img/simple-guide.gif)
 - 파티션 정보 확인
-![fdisk 예 2-4](../assets/img/simple-guide.gif)
+![fdisk 예 3-4](../assets/img/simple-guide.gif)
 - 파티션 타입 변경(5번 파티션을 Swap 타입으로 설정
-![fdisk 예 2-5](../assets/img/simple-guide.gif)
+![fdisk 예 3-5](../assets/img/simple-guide.gif)
 -설정 정보 저장 후 디스크 관리모드 종료
-![fdisk 예 2-6](../assets/img/simple-guide.gif)
+![fdisk 예 3-6](../assets/img/simple-guide.gif)
 
 ## mkfs
 - 파일 시스템 생성 명령어
 ## 사용법 및 옵션
-- # mkfs [옵션] [장치 이름
+- mkfs [옵션] [장치 이름]
 
 {: .box-note}
--t[종류]: 파일 시스템의 종류 선택
--c: 파일 시스템을 생성하기 전에 bad block을 검사 함
--v: 작업 상태와 결과를 자세히 출력 함
+-t[종류]: 파일 시스템의 종류 선택<br>
+-c: 파일 시스템을 생성하기 전에 bad block을 검사 함<br>
+-v: 작업 상태와 결과를 자세히 출력 함<br>
 
 - 파일 시스템 생성(/dev/sdb1 장치에 ext4 파일 시스템 생성)
 ![file system 예 1](../assets/img/simple-guide.gif)
@@ -113,7 +113,7 @@ comments: true
 - 파일 시스템 마운트 명령
 
 ## 사용법 및 옵션
-- # mount [-t 파일시스템 유형][-o 옵션][장치 이름][마운트 포인트]
+- mount [-t 파일시스템 유형][-o 옵션][장치 이름][마운트 포인트]
 
 {: .box-note}
 async: 마운트된 파일시스템에 비 동기 입출력을 사용<br>
@@ -124,95 +124,53 @@ exec: 파일 시스템에 포함된 프로그램을 실행 할 수 있도록 함
 noauto: 자동 마운트가 되지 않도록 함<br>
 noexec: 해당 파일 시스템의 프로그램이 실행되지 않도록 함, 특정 보안 목적을 위해 사용<br>
 nosuid: 실행 파일에 존재하는 suid, sgid 비트의 기능 제한<br>
-nouser: 루트(root) 외에 사용자가 파일 시스템을 마운트 하거나 언마운트 하는 것을 제한
+nouser: 루트(root) 외에 사용자가 파일 시스템을 마운트 하거나 언마운트 하는 것을 제한<br>
+ro: 읽기 전용으로 마운트<br>
+rw: 읽기와 쓰기가 가능하도록 마운트<br>
+suid: 실행 파일의 존재하는 suid,sgid 비트의 기능을 사용<br>
+sync: 마운트된 파일시스템에 동기식 입출력을 사용<br>
+user: 일반 사용자의 파일시스템 마운트 허용<br>
+users: 모든 일반 사용자가 파일시스템 마운트, 언마운트가 가능하도록 허용<br>
+noatime: access time을 기록하지 않음, 자주 파일에 엑세스 할 경우 유용하다. 
 
+## umount
+- 마운트를 해제하는 명령어
+- 즉 운영체제와 장치를 해제하는 명령어이다.
 
+## 사용법
+- umount [마운트 포인터]
 
-### 동영상 가이드
+## 파일 시스템 언마운트 예
+![umount 예 1](../assets/img/simple-guide.gif)
 
-[동영상 가이드: 약 10분](https://www.youtube.com/watch?v=UgPZXxL2jSw)
+## 파일 시스템 마운트 관리 파일(/etc/fstab)
+- 리눅스가 부팅되면서 파일 시스템을 어디에 자동으로 마운트하고, 외부 장치들에 대한 마운트를 어떻게 설
+정하는지, 권한 및 복구 등의 옵션을 어떻게 이용할 지 지정하는 파일
+- 시스템 부팅 시 /etc/fstab에 기록되어 있는 순서대로 파티션이 마운트 되어 한 개의 디렉토리 트리가 만들
+어 짐
 
-<iframe width="770" height="432" src="https://www.youtube.com/embed/UgPZXxL2jSw" frameborder="0" allowfullscreen></iframe>
+## 예시
+![fstab 예 1](../assets/img/simple-guide.gif)
 
-<br>
+## fstab 확인
+- cat /etc/fstab
+-  ①UUID=ec78d766-639a-4c6e-80a5-627449f11768 ②/ ③ext4 ④defaults ⑤1 ⑥1
+![fstab 예 2](../assets/img/simple-guide.gif)
 
-### 간단 GIF 가이드
+## UUID(Universally Unique IDentifier)
+- 16Byte(128Bit)로 이루어진 규격화된 숫자이다.
+- 네트워크 상에서 서로 모르는 개체들을 식별하고 구별하기 위한 고유한 이름이다.
+- 중앙 관리 시스템이 없는 분산 시스템에서 정보를 유일하게 식별하기 위한 값이다.
 
-가이드를 19 단계의 애니메이션으로 표현
+## UUID 확인
+- blkid
+![uuid 예 1](../assets/img/simple-guide.gif)
 
-![간단 가이드](../assets/img/simple-guide.gif)
+## Disk 최종 실습
+- 20GB 크기를 가진 하드디스크 추가 장착
+- 1번 파티션은 기본 파티션으로 8GB 용량으로 분할
+- 2번 파티션은 확장 파티션으로 12GB 용량으로 분할 후 4GB를 가지는 논리 파티션 추가
+- 각각 두 개의 파티션을 ext4 파일시스템 유형으로 포맷
+- 기본 파티션은 /game에 마운트
+- 논리 파티션은 /music에 마운트
 
-<br>
-
-### 상세 설명
-
-1. GitHub 계정이 없는 경우, GitHub 계정을 생성하고 이메일 인증을 수행합니다.
-
-   1. GitHub 계정 생성
-      ![GitHub 계정 생성](../assets/img/githubpage-guide/p1.jpg)
-
-   1. GitHub 계정 이메일 인증
-      ![GitHub 계정 이메일 인증](../assets/img/githubpage-guide/p2.jpg)
-
-1. 웹사이트의 기본 소스를 제공하는 GitHub 저장소에 접속하고, `Fork` 를 통해 해당 저장소를 본인의 GitHub 계정으로 복제합니다.
-
-    1. [https://github.com/seokho-son/seokho-son.github.io](https://github.com/seokho-son/seokho-son.github.io) 저장소에 접속
-       ![GitHub 저장소 접속](../assets/img/githubpage-guide/g2.jpg)
-
-    1. [https://seokho-son.github.io](https://seokho-son.github.io) 접속을 통해 데모 웹사이트 확인
-       ![GitHub Page 접속](../assets/img/githubpage-guide/g1.jpg)
-
-    1. GitHub의 `Fork` 기능을 통해 저장소를 본인의 GitHub 계정으로 복제
-       ![GitHub 포크](../assets/img/githubpage-guide/g3.jpg)
-
-       `Fork` 는 Git 저장소를 복제 및 기존 저장소와 연계시키는 기능 (보통 공동 작업을 위한 방법)
-
-    1. 본인 계정에 복제된 저장소 확인
-       ![GitHub 포크 확인](../assets/img/githubpage-guide/g5.jpg)
-
-1. GitHub Page 활성화를 위해 저장소 명칭 변경
-
-    1. `Settings` 탭을 선택하고 `Repository name` 을 `계정이름.github.io` 로 변경
-        ![저장소 이름 변경](../assets/img/githubpage-guide/g7.jpg)
-
-    GitHub는 `계정이름.github.io` 인 저장소에 대해 자동으로 소스코드 빌드 및 호스팅을 수행함
-
-    1. 자동 생성된 웹사이트 확인
-        ![자동 생성 웹사이트 확인](../assets/img/githubpage-guide/g8.jpg)
-
-
-1. 자신의 웹사이트로 내용 커스터마이징
-
-    1. `_config.yml` 파일을 선택하여 내용 수정 및 저장소에 수정 사항 반영
-
-        `_config.yml` 파일은 웹사이트의 설정 정보가 포함되어 있음. `수정필요` 로 코멘트된 사항에 대해 커스터마이징 진행.
-
-        ![컨피그 확인](../assets/img/githubpage-guide/g9.jpg)
-
-        ![컨피그 수정](../assets/img/githubpage-guide/g10.jpg)
-
-        ![컨피그 수정2](../assets/img/githubpage-guide/g11.jpg)
-
-        ![컨피그 커밋](../assets/img/githubpage-guide/g12.jpg)
-
-        `Commit` (`git commit`)은 어려가지 변경 사항에 대한 스넵샷을 제공하는 기능임. 수정 사항을 저장소에 반영하기 위해서는 `Commit` 이라는 행위를 필수적으로 수행해야 함.
-
-    1. `index.md` 파일을 선택하여 내용 수정 및 저장소에 수정 사항 반영
-
-        ![인덱스 확인](../assets/img/githubpage-guide/g13.jpg)
-
-        ![인덱스 수정](../assets/img/githubpage-guide/g14.jpg)
-
-        ![인덱스 커밋](../assets/img/githubpage-guide/g15.jpg)
-
-        `index.md` 는 웹사이트에서 첫 페이지(`home`)의 소스 파일임. 커스터마이징 진행.
-
-        `.md` 파일은 [마크다운 언어](https://ko.wikipedia.org/wiki/마크다운)으로 작성되는 것을 의미함.
-
-    1. `carrer.md` , `publication.md` 등 `*.md` 에 대해서도 커스터마이징 진행
-
-
-1. 내용이 업데이트된 웹사이트 최종 확인
-    ![업데이트된 웹사이트](../assets/img/githubpage-guide/g17.jpg)
-
-끝.
