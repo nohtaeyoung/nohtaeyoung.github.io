@@ -4,7 +4,7 @@ title: Linux disk managment
 subtitle: 리눅스에서 디스크 관리하는 방법
 gh-repo: seokho-son/seokho-son.github.io
 #gh-badge: [star, fork, follow]
-cover-img: /assets/img/cat-taesik-wide.jpg
+cover-img: /assets/img/linux.png
 tags: [Linux, disk, GitHub, managment, infosec_oh_nohoooooo_tae_young, taeyoung noh]
 comments: true
 ---
