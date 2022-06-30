@@ -1,0 +1,88 @@
+---
+layout: post
+title: OSI 7Layer
+subtitle: OSI 7게층
+gh-repo: seokho-son/seokho-son.github.io
+#gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [network, OSI7 Layer,GitHub, infosec_oh_nohoooooo_tae_young, taeyoung noh]
+comments: true
+---
+
+
+<br>
+## OSI 7Layer 참조 모델
+
+- 국제 표준화 기구(ISO)에서 표준화를 위해 개발된 모델
+- 현재 참조용으로 사용되고 있음
+  - 각 계층의 역할에 맞는 개발에 참조
+  - Troubleshooting 시 참조
+  - 학습 목적으로 사용
+
+![osi 7계층 모델](../assets/img/df예 -h.png)
+
+## TCP/IP Model
+
+- 실제 통신에 사용되는 모델
+
+![TCP/IP 모델](../assets/img/df예 -h.png)
+
+## Network Model 
+- 1~4계층: 하위 계층(= 하드웨어 계층)
+  - <span style="color:red">데이터 전달 계층</span>으로 주로 <b>네트워크 분야에서 참조</b>
+- 5~7계층: 상위 계층(= 소프트웨어 계층)
+  -  <span style="color:red">데이터 생성 계층</span>으로 주로 소프트웨어 개발 분야에서 참조
+
+![상위 하위 계층](../assets/img/df예 -h.png)
+
+## 통신에 사용되는 주소
+- 2,3,4계층에서 데이터 전달에 필요한 주소를 사용
+- 4계층: 서비스 주소(Port 주소)
+- 3계층: 논리적 주소(IP주소)
+- 2계층: 물리적 주소(MAC 주소)
+
+## 계층별 Network 장비
+| Layer | 장비 | 역할 | 
+| ------------------------------ | :--------------: | :----------------: |
+| 1계층 |  | [[Cable] | [[Repeater/Hub] | [[신호 전달] | [[신호 재생(거리 연장)]
+| 2계층 | Bridge/Switch |Switching<br> MAC 주소 구분 |
+| 3계층 | Router/L3 Switch | Routing<br> IP 주소 구분 | 
+
+## OSI 7 Reference Model(data 송신)
+
+![osi 송신](../assets/img/df예 -h.png)
+
+## OSI 7 Reference Model(data 수신)
+
+![osi 수신](../assets/img/df예 -h.png)
+
+## Encapsulation
+- 송신자 측에서 데이터를 전송할 때 상위계층에서 하위계층으로 내려오면서 순차적으로 데이터를 합쳐주는 과정
+
+![encaqsulation](../assets/img/df예 -h.png)
+
+## De-caqsulation
+- 수신자 측에서 데이터를 전송 받은 후 하위계층부터 상위계층으로 올라오면서 순차적으로 데이터를 확인하며 떼어내는 과정
+
+![decaqsulation](../assets/img/df예 -h.png)
+
+## SDU(Service Data Unit)
+- 상위 계층에서 내려온 데이터를 지칭
+- 다른 말로 Payload 라고 부름
+
+## PDU(Protocol Data Unit)
+- 상위 계층에서 내려온 데이터에 해당 계층의 정보를 포함한 데이터를 지칭
+- header + SDU + footer
+- 계층별 PDU 명
+
+
+| 계층 | PDU 명 |
+| ------------------------------ | :--------------: | 
+|계층|PDU 명|
+|Application| 
+|Presentation|Message|
+|Session|
+|Transport|Segment| 
+|Network|Packet|
+|Data Link|Frame| 
+|Physical|Bit| 
