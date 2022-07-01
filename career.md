@@ -9,7 +9,7 @@ title: Career
 
 ### Education
 
-* Korea IT academy (21.5 ~ 21.5)
+* Korea IT academy (21.5 ~ 22.5)
   * C , PYTHON , JAVA , CISCO , LINUX , SECURITY ,...(350H)
 
 * 보안프로젝트 (22.4 ~ ing)
