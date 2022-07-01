@@ -13,7 +13,7 @@ cover-img: /assets/img/codingimage.jpg
 2. *__정보보안 산업기사 취득__*
 3. *__정보보안 프로젝트 진행하기__*
 4. *__70학점 이상 만들기__*
-
+{: .box-note}
 
 
 
