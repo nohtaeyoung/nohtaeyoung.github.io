@@ -28,15 +28,23 @@ comments: true
 - 동축 케이블
   - 동축케이블은 TV신호나 안테나같이 손실이 적어야 하는 장비들에 사용된다.
 
+![동축](../assets/img/동축.png)
+
 - 꼬임쌍선 케이블
   - 현재 LAN 구성에서 일반적으로 사용되고 있다. (LAN은 나중에 자세히 알아보자)
+
+![꼬임쌍선](../assets/img/꼬임쌍선.png)
 
 -시리얼 케이블
   - 직렬포트로 서로 연결하여 통신한다는데
   - 요즘에는 자주 사용이 안된다.
 
+![시리얼](../assets/img/시리얼.png)
+
 - 광 케이블
   -빛 신호를 이용하여 데이터를 전달하는 케이블이다.
+  
+![광](../assets/img/광.png)
   
 ## Hub & Repeater
   
@@ -46,94 +54,69 @@ comments: true
     
 # Hub
 - 한쪽 포트로 전달받은 신호를 재생시켜 나머지 포트에 모두 전달한다.(자세한 설명은 아래에서)
+- 
  <td><img alt="../assets/img/repeater.png" src="../assets/img/hub.png" /></td>
 
 ## Hub 통신 방법
 - 허브에는 여러개의 포트가 있다.
 - 근데 한 포트에서 신호가 왔다.
 - 그럼 목적지에만 신호를 보내는것이 아니고 본인의 포트에게 다 신호를 보낸다.
-- 이것을 Flooding이라고 한다.
+- 이것을 <p style="clore:red;"Flooding</p> 이라고 한다.
 - 그러면 만약에 해커가 허브 포트와 연결된 장비의 ip주소로 변조 했다면 어떻게 될까?
 - 당연히 그 신호 즉 데이터를 해커도 받는다는 보안성에 단점이 있다.
-![osi flooding](../assets/img/osi7계층모델.png)
 
-![osi 7계층 모델](../assets/img/osi7계층모델.png)
+![osi flooding](../assets/img/flooding.png)
 
-## TCP/IP Model
+## 신호 전달 방식
+# Simplex
+- 단 방향 신호 전달
+- 한 방향으로만 신호를 전달한다.
+- ex) 방송국, 일방통행 도로
 
-- 실제 통신에 사용되는 모델
+![simplex](../assets/img/simplex.png)
 
-![TCP/IP 모델](../assets/img/tcpip모델.png)
+# Half-Duplex
+- 반 이중 신호전달 방식
+- 양 쪽 전송이 가능하지만 한 순간에 한 방향으로만 전달이 가능하다.
+- ex) 무전기
 
-## Network Model 
-- 1~4계층: 하위 계층(= 하드웨어 계층)
-  - <span style="color:red">데이터 전달 계층</span>으로 주로 <b>네트워크 분야에서 참조</b>
-- 5~7계층: 상위 계층(= 소프트웨어 계층)
-  -  <span style="color:red">데이터 생성 계층</span>으로 주로 소프트웨어 개발 분야에서 참조
+![halfduplex](../assets/img/halfduplex.png)
 
-![상위 하위 계층](../assets/img/상위하위계층.png)
+# Full-Duplex
+- 전 이중 신호전달 방식
+- 동시에 양 방향으로 전달할 수 있음
+- ex) 전화기
 
-## 통신에 사용되는 주소
-- 2,3,4계층에서 데이터 전달에 필요한 주소를 사용
-- 4계층: 서비스 주소(Port 주소)
-- 3계층: 논리적 주소(IP주소)
-- 2계층: 물리적 주소(MAC 주소)
+![fullduplex](../assets/img/fullduplex.png)
 
-## 계층별 Network 장비
+여기서 지금 우리가 배우고 있는 Hub는 어디에 해당할까?
 
-|Layer|장비|역할| 
-| ------------------------------ | :--------------: | :----------------: |
-|1계층|Cable|신호 전달|
-|1계층|Repeater/Hub|신호 재생(거리연장)|
-|2계층|Bridge/Switch|Switching<br> MAC 주소 구분|
-|3계층|Router/L3 Switch|Routing<br> IP 주소 구분| 
+답은 Half-Duplex이다!
 
-## OSI 7 Reference Model(data 송신)
+## 하지만 Hub에는 통신에 큰 문제점이 하나 있는데!
+- 그것은 경쟁을 통해 매체를 이용하고 신호를 전달하는 Hub의 특성상 신호의 충동이 일어나게 된다.
+- 이것을 Collision Domain이라 하고 그래서 그것을 방지하기 위해 나온 것은! CSMA/CD!
 
-![osi 송신](../assets/img/osi 송신.png) 
+## Collision Domain
+- <p style="clore:red;">신호 충돌이 발생 가능한 영역을 Collision Domain이라 한다.</P>
 
-## OSI 7 Reference Model(data 수신)
+![collisiondomain](../assets/img/collisiondomain.png)
 
-![osi 수신](../assets/img/osi 수신.png)
+## CSMA/CD
+- Collision Domain에서 매체 접근의 우선순위를 지정하여 충돌을 예방하고 충돌이 발생한 경우 해결방법을
+제시하는 기법이다.
+- CSMA(Carrier Sense Multiple Access - 매체 사용 감지)
+  -  <p style="clore:red;">충돌 예방</p>
+  -  매체 감지 신호를 통해 매체 사용 가능 여부를 확인하고 신호를 전달 한다.
+  -  매체 사용(busy)을 감지하면 일정한 대기 시간 후 다시 확인하고 전달 한다.
+- CD(Collision Detection - 충돌 감지)
+  -  <p style="clore:red;">충돌이 감지된 경우 재 충돌을 방지</p>
+  -  충돌을 감지한 장비에서 충돌 감지 신호(JAM신호)를 전달하여 호스트에게 데이터 전송 중지를 알린다.
+  -  충돌 감지 신호(JAM 신호)를 전달받은 모든 장비는 임의의 대기 시간 후 순서에 따라 신호를 전달 한다.
 
-## Encapsulation
-- 송신자 측에서 데이터를 전송할 때 상위계층에서 하위계층으로 내려오면서 순차적으로 데이터를 합쳐주는 과정
-
-![encaqsulation](../assets/img/encapsulation.png)
-
-## De-caqsulation
-- 수신자 측에서 데이터를 전송 받은 후 하위계층부터 상위계층으로 올라오면서 순차적으로 데이터를 확인하며 떼어내는 과정
-
-![decaqsulation](../assets/img/decapsulation.png)
-
-## SDU(Service Data Unit)
-- 상위 계층에서 내려온 데이터를 지칭
-- 다른 말로 Payload 라고 부름
-
-## PDU(Protocol Data Unit)
-- 상위 계층에서 내려온 데이터에 해당 계층의 정보를 포함한 데이터를 지칭
-- header + SDU + footer
-- 계층별 PDU 명
-
-
-| 계층 | PDU 명 |
-| ------------------------------ | :--------------: | 
-|Application| 
-|Presentation|Message|
-|Session|
-|Transport|Segment| 
-|Network|Packet|
-|Data Link|Frame| 
-|Physical|Bit| 
-
-## OSI 7계층 정리
-
-| ------------------------------ | :--------------: | :--------------: | :--------------: | :--------------: | 
-|계층|기능|주소|Protocol|장비 
-|7계층 Application<br>(응용 계층)|사용자 인터페이스 계층으로 사용자의 명령을 받으주는 계층(응용 프로그램)||HTTP, FTP, Telnet<br>SSH,DNS,DHCP,...||
-|6계층 Presentation<br>(표현 계층)|상위계층에서 만들어진 데이터의 형태 표현<br>인코딩, 압축, 암호화 등에 대한 정보||||
-|5계층 Session<br>(세션 계층)|특정 종류(연결이 필요한 종류)의 서비스를 받을 때만 사용<br>연결상태 제어|||| 
-|4계층 Transport<br>(전송 계층)|데이터 전송방식 결정<br>서비스 구분(서비스 주소)<br>필요에 따라 단편화 작업 수행|Port 주소|TCP/UDP|L4 Switch|
-|3계층 Network<br>(네트워크 계층)|출발지와 목적지의 주소 (논리적 주소 부여<br>-> 종단 간 연결 보장(end to end)|IP 주소|ICMP<br>IP<br>ARP,...|Router<br>L3 Switch| 
-|2계층 Data Link<br>(데이터 링크 계층)|인접 장비에 접근하기 위한 정보(물리적 주소) 부여<br>->Node 간 연결 보장(node to node)<br>네트워크 환경에 맞는 정보 부여|MAC 주소|LAN: Ethernet<br>WAN: HDLC,PPP|Switch<br>Bridge|
-|1계층 Physical<br>(물리 계층)|비트 형태의 신호를 패턴을 부여하여 전기적 신호로 변경하여 전송|||Cable, Connecter,<br>Hub,Repeater| 
+##  CSMA/CD 동작 방식
+- CSMA(매체사용감지)기법으로 네트워크에 전송중인 데이터가 있는지 검사한 후 데이터를 전송한다.
+- CD(충돌감지) 기법으로 충돌을 감지한다.
+  - 충돌 발생 시 충돌감지신호를 만들어서 Flooding으로 모든 Collision Domain에 전송한다.
+  - 충돌감지신호가 들어오면 모든 컴퓨터에서 랜덤시간으로 대기한 후 데이터를 전송한다.
+ 
