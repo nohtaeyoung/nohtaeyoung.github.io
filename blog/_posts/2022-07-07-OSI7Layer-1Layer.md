@@ -55,12 +55,9 @@ comments: true
 # Hub
 - 한쪽 포트로 전달받은 신호를 재생시켜 나머지 포트에 모두 전달한다.(자세한 설명은 아래에서)
 
-<table>
-  <tr>
-    <td><img alt="" src="../assets/img/repeater.png" /></td><td><img alt="" src="../assets/img/hub.png" /></td>
-  <tr>
-</table>
-
+<tr>
+  <td><img alt="" src="../assets/img/repeater.png" /></td><td><img alt="" src="../assets/img/hub.png" /></td>
+<tr>
 
 ## Hub 통신 방법
 - 허브에는 여러개의 포트가 있다.
