@@ -51,13 +51,13 @@ comments: true
 # Repeater
 - 리피터는 단순하게 우리가 신호를 보낼 떄 각 케이블마다의 일정거리가 넘어가게 되면 감쇠현상이 일어난다.<br>
   그때 리피터를 연결하면 거리가 연장된다.
+  
+  ![repeater](../assets/img/repeater.png)
     
 # Hub
 - 한쪽 포트로 전달받은 신호를 재생시켜 나머지 포트에 모두 전달한다.(자세한 설명은 아래에서)
 
-<tr>
-  <td><img alt="" src="../assets/img/repeater.png" /></td><td><img alt="" src="../assets/img/hub.png" /></td>
-<tr>
+![hub](../assets/img/hub.png)
 
 ## Hub 통신 방법
 - 허브에는 여러개의 포트가 있다.
