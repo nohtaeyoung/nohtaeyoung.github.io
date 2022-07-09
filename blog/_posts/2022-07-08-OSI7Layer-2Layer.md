@@ -90,12 +90,12 @@ comments: true
  
  ![통신방식1](../assets/img/통신방식1.png)
  
- 1. Switch로 데이터가 들어오면 SMAC 주소를 MAC Table에서 확인
+ 1. Switch로 데이터가 들어오면 SMAC 주소를 MAC Table에서 확인<br>
   1-1. 없으면 MAC Table에 SMAC(출발지 mac주소) 주소를 기록(Learning)
 
 ![통신방식2](../assets/img/통신방식2.png)
 
-2. DMAC(도착지 mac주소) 주소를 MAC Table에서 확인
+2. DMAC(도착지 mac주소) 주소를 MAC Table에서 확인<br>
  2.1  없으면 Flooding
 
 ![통신방식3](../assets/img/통신방식3.png)
@@ -104,17 +104,17 @@ comments: true
 
 ![통신방식4](../assets/img/통신방식4.png)
 
-4. 수신자가 다시 응답 데이터를 전송할 때 SMAC을 MAC Table에서 확인
+4. 수신자가 다시 응답 데이터를 전송할 때 SMAC을 MAC Table에서 확인<br>
  4-1. 없으면 MAC Table에 SMAC 주소를 기록(Learning)
 
 ![통신방식5](../assets/img/통신방식5.png)
 
-5. DMAC 주소를 MAC Table에서 확인
+5. DMAC 주소를 MAC Table에서 확인<br>
  5-1 있으면 해당 Port로만 데이터 전송(Filtering/Forwarding)
 
 ![통신방식6](../assets/img/통신방식6.png)
 
-6. MAC Table에 SMAC 주소가 있는 경우 학습하지 않음
+6. MAC Table에 SMAC 주소가 있는 경우 학습하지 않음<br>
  6-1.MAC Table에 DMAC 주소가 있는 경우 Flooding 하지 않고 <b style="color:red;">해당 목적지로만 데이터 전송</b><br>
 (Filtering/Forwarding)
 
