@@ -12,8 +12,8 @@ comments: true
 
 ## 초기 작업
 {: .box-note}
-블로그 내의 모든 예시와 실습은 VMware15 workstation, centos7(CLI 환경),Moboxterm,window xp, window 2003을 활용 합니다.<br>
-또한 구성도의 가장 왼쪽의 있는 부분을 작업합니다.
+<b>블로그 내의 모든 예시와 실습은 VMware15 workstation, centos7(CLI 환경),Moboxterm,window xp, window 2003을 활용 합니다.<br>
+또한 구성도의 가장 왼쪽의 있는 부분을 작업합니다.</b>
 {: .box-note}
 
 
