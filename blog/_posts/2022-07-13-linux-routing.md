@@ -14,8 +14,8 @@ comments: true
 {: .box-note}
 블로그 내의 모든 예시와 실습은 VMware15 workstation, centos7(CLI 환경),Moboxterm,window xp, window 2003을 활용 합니다.<br>
 또한 구성도의 가장 왼쪽의 있는 부분을 작업합니다.
+{: .box-note}
 
-< br>
 
 {: .box-note}
 vmware 상단에 edit->virtual network editor 클릭<br>
