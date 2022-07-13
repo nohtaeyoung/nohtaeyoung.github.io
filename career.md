@@ -19,5 +19,5 @@ title: Career
   * 정보시스템 구축 기반 ICT정보보안 전문가 양성과정
  
 ### Qualification
-
+* 네트워크관리사 2급 (2022.07)
 ### Project
