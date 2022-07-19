@@ -193,3 +193,17 @@ noatime: access time을 기록하지 않음, 자주 파일에 엑세스 할 경�
 - 기본 파티션은 /game에 마운트
 - 논리 파티션은 /music에 마운트
 
+<script src="https://giscus.app/client.js"
+        data-repo="nohtaeyoung/nohtaeyoung.github.io"
+        data-repo-id="R_kgDOHixriA"
+        data-category="General"
+        data-category-id="DIC_kwDOHixriM4CQSxP"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
