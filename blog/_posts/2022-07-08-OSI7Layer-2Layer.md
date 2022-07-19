@@ -151,4 +151,18 @@ comments: true
   - 프레임의 64byte를 검사해서 FCS 가 있으면 Store and Forward 방식
   - FCS 가 없으면 Cut-Through
  
+ <script src="https://giscus.app/client.js"
+        data-repo="nohtaeyoung/nohtaeyoung.github.io"
+        data-repo-id="R_kgDOHixriA"
+        data-category="General"
+        data-category-id="DIC_kwDOHixriM4CQSxP"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
 
