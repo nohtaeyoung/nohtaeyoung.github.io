@@ -122,3 +122,17 @@ comments: true
   - 충돌 발생 시 충돌감지신호를 만들어서 Flooding으로 모든 Collision Domain에 전송한다.
   - 충돌감지신호가 들어오면 모든 컴퓨터에서 랜덤시간으로 대기한 후 데이터를 전송한다.
  
+<script src="https://giscus.app/client.js"
+        data-repo="nohtaeyoung/nohtaeyoung.github.io"
+        data-repo-id="R_kgDOHixriA"
+        data-category="General"
+        data-category-id="DIC_kwDOHixriM4CQSxP"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
