@@ -1,0 +1,172 @@
+---
+layout: post
+title: Linux Firewall 3
+subtitle: iptables 확장모듈 -m 
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [firewall,iptablesnetwork, Routing, System, Linux, GitHub, infosec_oh_nohoooooo_tae_young, taeyoung noh]
+comments: true
+---
+
+
+## 초기 작업
+
+{: .box-note}
+블로그 내에서의 ip는 실습환경마다 다를 수 있습니다.
+
+{: .box-note}
+<b>블로그 내의 모든 예시와 실습은 VMware16.2.3 workstation, centos7(CLI 환경),Moboxterm,window xp, window 2003을 활용 합니다.<br>
+{: .box-note}
+
+{: .box-note}
+xp에는 setting -> network adepter -> custom-> vmnet2(host-only)<br>
+2003에는 setting -> network adepter -> custom-> vmnet1(host-only)<br>
+
+
+
+
+<br>
+
+## 구성도
+
+![리눅스 라우터 구성도1](../assets/img/리눅스 라우터 구성도1.png)
+
+### TCP 20,80 포트로 접근을 허용하는 정책 설정
+
+## 정책 초기화
+
+![정책 삭제](../assets/img/정책 삭제.png)
+
+## 80번 포트인 http 설치
+
+![httpd 설치.png](../assets/img/httpd 설치.png)
+
+## 22번 포트 허용
+
+![22번 허용.png](../assets/img/22번 허용.png)
+
+## 80번 포트 허용
+
+![80번 설치.png](../assets/img/80번 설치.png)
+
+## 나머지는 모두 차단
+
+![나머지 차단.png.png](../assets/img/나머지 차단.png)
+
+## Window XP에서 icmp 확인
+
+![icmp 거부.png](../assets/img/icmp 거부.png)
+
+## Window XP에서 172.16.0.120 서버 확인
+
+![httpd 허용.png](../assets/img/httpd 허용.png)
+
+## Window XP에서 172.16.0.120로 ssh 접속 확인
+
+![ssh 허용.png](../assets/img/ssh 허용.png)
+
+<h3>모든 정책들이 잘 설정된 것으로 모인다.</h3>
+
+## 22번 허용,80번 허용 정책 삭제
+- 여기서 22번 포트와 80번 포트만 삭제하라고 했으니 모두 거부 정책은 삭제하면 안된다.<br>
+그럴때 line이라는 것으로 정책 번호를 확인하고 그 라인 번호에 해당하는 정책만 삭제할 것이다.
+
+1.라인을 확인한다.
+
+![line 확인.png](../assets/img/line 확인.png)
+
+2. 22번포트의 라인을 삭제한다.
+
+![ssh 삭제.pngg](../assets/img/ssh 삭제.png)
+
+3. 그렇게 된면 80번 포트가 1번 라인으로 올라오게 된다. 22번과 같이 삭제한다.
+
+![ssh 삭제.pngg](../assets/img/ssh 삭제.png)
+
+## 22번 과 80번 포트를 한 정책으로 설정해보자
+- multiport라는 것을 사용하면 22번 포트와 80번 포트를 한줄로 정책 설정 할 수 있다.
+
+![multiport 사용.png](../assets/img/multiport 사용.png)
+
+## 그리고 정책을 확인해 보지만 조금 이상하다?
+
+![순서가 낮음.png](../assets/img/순서가 낮음.png)
+
+- 그렇다 우선순위가 모드 DROP 것보다 낮다
+- 그렇게 되면 우리가 22번 포트 80번 포트로 들어와도 차단 당한다.
+
+## 그럼 어떻게..?
+- 중간 -A를 -I로 바꾼다 Insert라는 의미로 정책의 우선순위가 된다.
+
+![정책 순서를 올린다.png](../assets/img/정책 순서를 올린다.png)
+
+<h3>그럼 잘 되는 것을 볼 수 있다.</h3>
+
+## 그럼 log에 기록 되는 정책을 설정해보자 일단 모든 정책을 삭제한다.
+
+![log 정책.pngg](../assets/img/log 정책.png)
+
+## 그리고 win xp에서 ping을 날려보자 무한으로
+
+![무한 ping.png](../assets/img/무한 ping.png)
+
+## log가 잘 남는지 확인 해보자
+
+![log 확인.png](../assets/img/log 확인.png)
+
+## 정책 해석
+
+![log 해석.png](../assets/img/log 해석.png)
+
+10개까지는 그대로 통과 시키고 6초마다 1개씩 통과
+
+## 상태 추적 확인
+- 일단 정책을 모두 초기화 시켜준다.
+
+## TCP 80번은 상태 추적으로 허용
+
+![80번 상태추적 확인.png](../assets/img/80번 상태추적 확인.png)
+
+## 22번 포트는 기본으로 허용
+
+![기본 허용.png](../assets/img/기본 허용.png)
+
+## 확인
+
+!추적 상태 확인.png(../assets/img/추적 상태 확인.png)
+
+## 그럼 win xp에서 22번과 80번 포트로 
+
+![httpd 허용.png](../assets/img/httpd 허용.png)
+
+![ssh 허용.png](../assets/img/ssh 허용.png)
+
+둘다 잘 되는것은 확인 할 수 있다.
+
+## 정책 해석
+
+![해석.png](../assets/img/해석.png)
+
+## 서버에서 추적된 내용 확인
+
+![tcp 상태 추적 확인.png](../assets/img/tcp 상태 추적 확인.png)
+
+<b>오잉? 상태 추적을 안한 22번 포트도 추적되서 나온다. 두 정책의 차이를 잘 모르겠다.</b>
+- 하지만 둘의 차이는 분명히 있다는 것 어려우니 나중에 다시 알아보자.
+- 그리고 분명히 80번 포트에는 확실하게 상태 추적이 적용되었다는것을 알아두자.
+
+<script src="https://giscus.app/client.js"
+        data-repo="nohtaeyoung/nohtaeyoung.github.io"
+        data-repo-id="R_kgDOHixriA"
+        data-category="General"
+        data-category-id="DIC_kwDOHixriM4CQSxP"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="ko"
+        crossorigin="anonymous"
+        async>
+</script>
