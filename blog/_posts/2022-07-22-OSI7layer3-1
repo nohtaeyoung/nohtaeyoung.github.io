@@ -1,0 +1,95 @@
+---
+layout: post
+title: OSI 7Layer-3 Layer 1
+subtitle: IP Adress
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [OSI 7Layer,network, GitHub, infosec_oh_nohoooooo_tae_young, taeyoung noh]
+comments: true
+---
+
+
+<br>
+
+## OSI 7Layer 2Layer
+<h3>IP를 통해 패킷이 전달되는 것으로 end to end라고 부른다.<br>
+목적지로 보내는 계층이라고 생각하면 된다.</h3>
+
+![3계층](../assets/img/3계층.png)
+
+## IP Address란?
+- 전체 네트워크에서 장치들이 서로를 인식하고 <b style='color:red;'>통신을 하기 위해서 사용하는 특수한 번호이다.</b>
+- IP 주소는 <b style='color:red;'>고유한 값으로 사용한다.</b>
+- IPv4 와 IPv6가 있다.
+
+## IPv4 표현
+- 총 4byte(32bits)의 크기를 가진다.
+- 4개의 옥텟(Octet)으로 구분하여 사용한다.
+  - 1byte(8bits)를 1옥텟이라 부름한다.
+  - 옥텟과 옥텟사이를 온점( . ) 으로 구분한다.
+- 일반적으로 10진수로 표현 한다.
+- IP의 총 개수 → 2^32 = 약 42억 9천만 개가 있다.
+
+## IP Address 구성 방식
+- Net(Network) ID와 Host ID로 구성되어 있다.
+
+![ip 구성방식](../assets/img/ip 구성방식.png)
+
+- <b style='color:red;'>Net ID : 네트워크 영역을 식별하기 위한 값</b>
+- <b style='color:red;'>Host ID : 한 네트워크 영역 안에서 호스트를 식별하기 위한 값</b>
+
+## Classful Network
+- 개수가 제한되어 있는 <b style='color:red;'>IP를 효율적으로 할당하고 관리하기 위해 도입</b>된 IP관리 체계다.
+- <b style='color:red;'>전체 IP를 지정된 크기대로 class라는 그룹으로 분리 한다.</b>
+- 네트워크에서 필요한 IP의 개수대로 class에 지정된 동일한 양만큼 IP를 할당하는 방식이다.
+  - IP 할당용 class → A, B, C
+- A~C Class의 Net ID 크기를 다르게 사용 한다.
+  - 하나의 Network 영역에서 할당 가능한 Host 크기가 달라진다.
+
+![a,b,c](../assets/img/a,b,c.png)
+
+## Class 별 Network 범위
+
+| ------------------------------ | :--------------: | :--------------: | :--------------: | :--------------: | :--------------: |
+|Class|첫 번째 옥텟|네트워크 수|호스트 수|전체 IP범위|용도| 
+|A class|<b style='color:red;'>0</b>XXX XXXX|2^7 = 128개|2^24 = 16,777,216개|0.0.0.0 ~ 127.255.255.255|국가 단위|
+|B class|<b style='color:red;'>10</b>XX XXXX|2^14 = 16,384개|65,536개|128.0.0.0 ~ 191.255.255.255|기업 단위|
+|C class|<b style='color:red;'>110</b>X XXXX|21^21 = 2,098,152개|2^8 = 254개|192.0.0.0 ~ 223.255.255.255|조직 단위| 
+|D class|<b style='color:red;'>1110</b> XXXX|||224.0.0.0 ~ 239.255.255.255|멀티캐스트|
+|E class|<b style='color:red;'>1111</b> XXXX|||240.0.0.0 ~ 255.255.255.255|연구,예약|
+
+## 공인 IP
+- ICANN,인터넷 진흥원(KISA)등의 IP 주소 할당 공인기관에서 할당한 인터넷 상에서 사용할 수 있는 IP주소
+- 중복된 주소를 사용 하면 안됨
+
+## Bogon IP(특수목적 IP)
+- 할당되지 않았거나 특수한 ㅁ목적으로 예약된 IP주소
+- Bogon IP 목록은 RFC3330(IPv4), RFC4773(IPv6) 문서를 통해 공표
+
+## Bogon IP 종류
+
+| ------------------------------ | :--------------: | :--------------: | 
+|<b>Zero 주소</b>|0.0.0.0 ~ 0.255.255.255|특수 목적으로 사용되는 예약 주소|
+|<b>Network 주소</b>|각 네트워크 대역의 가장 작은 주소|각 네트워크를 대표하는 네트워크 주소|
+|<b>Direct Broadcast</b>|각 네트워크 대역의 가장 큰 주소|각 네트워크에서만 사용되는 Broadcast 주소|
+|<b>Local Broadcast 주소|255.255.255.255|전체 네트워크에서 사용되는 Broacast 주소|
+|<b>Multicast 주소</b>|D Class 주소|Multicast Group을 위해 할당되는 주소|
+|<b>Loopback 주소</b>|169.254.0.0 ~ 169.254.255.255|IP자동할당에 실패했을 때 임의로 할당하는 주소|
+|<b>자동 대체 할당 주소</b>|A class : 10.0.0.0 ~ 10.255.255.255<br>B class : 172.16.0.0 ~ 172.31.255.255<br>C class : 192.168.0.0 ~ 192.168.255.255|공식적인 승인 없이 임의로 사용할 수 있는 주소<br>내부 통신용으로만 사용 가능<br>외부 통신 불가능 -> NAT를 이용하면 가능 함|
+
+## Classful Network 문제점
+- 무조건 고정된 개수대로 IP를 할당해야 한다.
+- 효율적이고 체계적인 관리를 위해 도입 되었지만 낭비를 유발 한다.
+- IP 부족 문제가 심각해 졌다.
+
+![full](../assets/img/full.png)
+
+## 해결 방법
+- subnet
+- classless Network
+
+
+
+
+
