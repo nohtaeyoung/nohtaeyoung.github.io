@@ -5,7 +5,7 @@ subtitle: 리눅스로 라우팅
 gh-repo: nohtaeyoung/nohtaeyoung.github.io
 gh-badge: [star, fork, follow]
 cover-img: /assets/img/security.jpg
-tags: [network, Routing, System, Linux, GitHub, infosec_oh_nohoooooo_tae_young, taeyoung noh]
+tags: [Linux]
 comments: true
 ---
 
