@@ -1,0 +1,108 @@
+---
+layout: post
+title: Static Routing -1-
+subtitle:  RIP
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [Network]
+comments: true
+---
+
+{: .box-note}
+이 블로그 내용은 RIP을 실습한 것에 초점을 맞추었기 때문에 ospf 이론에 관련한 설명은 적습니다.
+
+## OSPF(Open Shortest Path First Protocol) (AD : 110)
+- IETF 표준 Routing Protocol
+- 동일한 Protocol을 사용하는 인접장비와 <b style="color:red">Link 상태 정보(interface 정보)를 교환</b> 함
+ - Multicast Group -> 224.0.0.5, 224.0.0.6(DR/BDR)
+- <b style="color:red">빠른 속도(Link State) 기준으로 경로를 선택</b>
+ - 모든 장비의 Interface상태를 Topology Database에 기록한 뒤 각 Line에 드는 비용(Cost) 값을 계산하여 최적 경로 결정하고 Routing Table에 기록한다.
+ - Metric -> Cost(Bandwidth, 전송속도) -> 속도를 기준으로 경로를 선택 한다.
+- 큰 범위의 네트워크에서 사용 함 -> 정보 교환의 거리 제한이 없다.
+- 상태변화가 발생하는 단점을 보완하기 위해 영역을 나누어 관리한다.
+- 계층적인 구조를 가진다.
+
+## OSPF의 계층적인 구조
+- Routing 정보를 교환할 영역을 구분
+- Routing 동작을 위해 발생되는 back ground traffic의 부하를 줄인다.
+
+| ------------------------------ | :--------------: |
+|Area|OSPF 정보를 교환할 장비로 구성된 영역<br>반드시 back bone area(area 0)를 통해 연결되어 있어야 한다.|
+|ABR|(Area Border Router) back born과 다른 area를 연결하는 역할의 Router|
+|DR|하나의 Area 영역의 정보를 다른 Area와 교환하는 역할의 Router|
+|BDR|DR의 backup Router|
+
+## Single Area OSPF
+- Back born area만 존재하는 OSPF
+## Multi Area OSPF
+- Back born area에 하위 area가 계층적인 구조로 연결된 OSPF
+
+## OSPF의 계층적인 구조
+
+![ospf1](../assets/img/ospf1.png)
+
+## OSPF 동작 방식
+1. 모든 이웃에 Hello 메시지를 보내서 이웃 정보를 등록(주기 2초)
+2. LSA(Link-State Advertisement) 메시지를 보내 Interface 상태정보를 광고
+3. 전체 영역의 LSA 메시지를 받아 Database에 기록
+4. SPF Algorithm을 이용해 각 라인의 Cost 값 계산
+5. 가장 적은 Cost 값을 가진 경로를 Routing Table에 등록
+
+![ospf2](../assets/img/ospf2.png)
+
+## Wildcard Mask
+- 특정 IP주소나 네트워크 범위를 추출하기 위해 사용하는 필터 값
+- Subnet Mask로 표현할 수 없는 부분을 나타내기 위해 사용
+ - Wildcard mask의 bit는 연속되지 않아도 된다.
+- <b style="color:red">Bit 값이 0인 부분은 정해진 Bit 값과 반드시 일치해야 한다.</b>
+- <b style="color:red">Bit 값이 1인 부분은 일치하지 않아도 된다.(0 또는 1이 될 수 있다.)</b>
+
+![ospf3](../assets/img/ospf3.png)
+
+<h3>예) 짝수 IP만 추출하기 위한 Wildcard Mask
+<b>0000 0000.0000 0000.0000 0000.</b><b style="color:blue">1111 111</b><b>0</b>
+- Subnet Mask로는 표현할 수 없다.
+
+## ospf실습(구성도)
+
+![ospf4](../assets/img/ospf4.png)
+
+~~~
+-- OSPF 설정 
+Router1(config)#router ospf 1 -> 여러개의 ospf 를 동시에 동작 
+Router1(config-router)#passive-interface fastEthernet 0/0
+Router1(config-router)#network 192.168.1.254 0.0.0.0 area 0
+Router1(config-router)#network 2.2.2.1 0.0.0.0 area 0
+Router1(config-router)#network 1.1.1.1 0.0.0.0 area 0
+
+Router0(config)#router ospf 1
+Router0(config-router)#passive-interface fastEthernet 0/0
+Router0(config-router)#network 2.2.2.2 0.0.0.0 area 0
+Router0(config-router)#network 3.3.3.2 0.0.0.0 area 0
+Router0(config-router)#network 192.168.2.254 0.0.0.0 area 0
+
+Router2(config)#router ospf 1
+Router2(config-router)#passive-interface fastEthernet 0/0
+Router2(config-router)#network 1.1.1.2 0.0.0.0 area 0
+Router2(config-router)#network 3.3.3.3 0.0.0.0 area 0
+Router2(config-router)#network 192.168.3.254 0.0.0.0 area 0
+~~~
+
+~~~
+-- tracert 로 라우팅 경로 추적 
+C:\>tracert 192.168.3.192
+
+Tracing route to 192.168.3.192 over a maximum of 30 hops: 
+
+  1   0 ms      0 ms      0 ms      192.168.1.254
+  2   0 ms      5 ms      0 ms      2.2.2.2
+  3   11 ms     0 ms      13 ms     3.3.3.3
+  4   0 ms      0 ms      0 ms      192.168.3.192
+~~~
+
+~~~
+-- ospf 의 metric:최적경로를 결정하는 요소 은 bandwidth가 영향을 미치지만
+bandwidth 는 아니고 cost(비용) 이라고 부른다 
+cf) RIP 의 metric -> hops
+~~~
