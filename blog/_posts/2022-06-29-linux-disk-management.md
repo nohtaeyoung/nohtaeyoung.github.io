@@ -5,7 +5,7 @@ subtitle: 리눅스에서 디스크 관리하는 방법
 gh-repo: nohtaeyoung/nohtaeyoung.github.io
 gh-badge: [star, fork, follow]
 cover-img: /assets/img/security.jpg
-tags: [Linux, disk, GitHub, management, infosec_oh_nohoooooo_tae_young, taeyoung noh]
+tags: [Linux]
 comments: true
 ---
 
