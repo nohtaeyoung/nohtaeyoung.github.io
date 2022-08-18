@@ -1,0 +1,112 @@
+---
+layout: post
+title: ACL -1-
+subtitle: Numbered 형 ACL 이론
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [Network]
+comments: true
+---
+
+## ACL(Access Control List)
+-  Router 내부 <b style="color:red">정책을 통해 데이터를 Fitering 해주는 역할</b>
+- 정책에 따른 트래픽 필터링, 식별, 분류, 암호화, 변환 작업등을 수행 한다.
+- ACL 정책은 항상 위에서 아래로 순차적으로 적용 된다.
+  
+## ACL 기본 동작
+- 순차적인 동작
+- 조건에 명시되어 있는 정보와 전달받은 packet의 정보를 비교하여 지정된 Action을 수행 한다.
+  - <b>Permit -> 허용, 사용된다.</b>
+  - <b>Deny -> 거부, 사용되지 않는다.</b>
+- 모든 조건에 해당되지 않으면 ALL Deny
+  - 항상 조건의 마지막에 <b style="color:red">기본값으로 "ALL Deny"</b>정책이 지정되어 있다.
+- 정책 구성 후 필요한 위치에서 적용 한다.
+
+![standard1](../assets/img/standard1.png)
+
+## ACL 종류
+- Numbered 형 ACL
+  - <b style="color:red">숫자를 식별 값</b>으로 사용하는 ACL
+- Named 형 ACL
+  - 방화벽의 보안정책 구성 및 <b style="color:red">복잡한 정책 구성</b>을 할 때 사용 된다.
+
+| ------------------------------ | :--------------: |------------------------------ | :--------------: |
+|종류|Numbered형 식별 값|필수 조건|옵션|
+|Standard|1~99|Source IP|X|
+|Extended|100~199|Protocol,Source IP, Destination ID|Port주소, Protocol 조건에 따라 다르다.|
+
+## ACL 적용 위치
+- 정책에 맞춰 구성된 조건(ACL)과 실 트래픽을 필터링 할 지점 설정
+- 트래픽을 필터링 해야 할 인터페이스
+- 종류 -> Inbound, Outbound
+- Inbound
+  - 인터페이스로 데이터가 유입됐을 때 정책 확인 후 전송
+  - ACL확인 -> Routing Table 확인(Routing)
+- Outbound(default)
+  - 인터페이스로 데이터가 전달되기 직전에 정책 확인 후 전송
+  - Routing Table 확인(Routing) -> ACL확인
+
+## ACL 설정 순서
+- 조건에 맞는 정책 계획
+  - 필요한 조건에 따라 미리 협의하여 정책에 대한 계획을 세운다.
+- Access-list 정책 생성
+  - 계획에 따라 정책을 설정하여 List 생성
+- ACL 적용
+  - 생성한 ACL을 이용할 위치(interface ...)에서 적용
+- ACL 설정 확인
+
+## ACL 설정 확인
+- 설정한 ACL의 조건 및 조건에 매치된 트래픽 정보 확인
+
+![standard2](../assets/img/standard2.png)
+
+- ACL이 적용된 인터페이스 정보 확인
+
+![standard3](../assets/img/standard3.png)
+
+## Numbered 형 ACL 설정
+- Access-list 정책 생성
+
+![standard4](../assets/img/standard4.png)
+
+  - ACL Number : ACL 정책을 구분하기 위한 정보
+    - 같은 번호로 설정 -> 조건 추가
+    - 새로운 번호로 설정 -> 새로운 ACL 생성
+  - Action : 정책의 허용/거부 여부를 지정
+  - 조건
+    - Standard 형 : [Source IP][Wildcard Mask]
+    - Extended 형 : [Protocol][Source IP][Wildcard Mask][옵션]
+
+- ACL 적용
+
+![standard5](../assets/img/standard5.png)
+
+  - in/out:ACL 적용 위치 지정(Inbound / Outbound)
+
+## Standard ACL
+- ACL Number 1~99, 1300~1999 사용
+- 필수 조건 -> Source IP
+- Wildcard Mask를 이용하여 조건에 매치할 IP의 범위를 지정할 수 있다.(생략 시 host를 의미 한다.)
+- 특정 키워드를 이용해 범위 지정이 가능하다.
+  - 모든 IP(0.0.0.0 255.255.255.255) = <b>any</b>
+  - 특정 IP 하나(10.10.10.1 0.0.0.0) = <b>host</b> 10.10.10.1
+
+![standard6](../assets/img/standard6.png)
+
+## Extended ACL
+- ACL Number 100~199m,2000~2699 사용
+- 필수 조건 -> Protocol(IP헤더의 Protocol 필드와 비교할 값), Source IP, Destination IP
+
+![standard7](../assets/img/standard7.png)
+
+- Option
+  - 지정된 pROTOCOL의 종류에 따라 다름
+  - 특정 기능을 수행하기 위한 조건을 지원 한다. -> Log, Established(상태추적),Qos ...
+  - TCP/UDP인 경우 Source port, Destination port를 조건으로 사용할 수 있다.
+
+![standard8](../assets/img/standard8.png)
+
+
+
+
