@@ -5,7 +5,7 @@ subtitle: OSI 7계층-2계층
 gh-repo: nohtaeyoung/nohtaeyoung.github.io
 gh-badge: [star, fork, follow]
 cover-img: /assets/img/security.jpg
-tags: [Network,OSI 7Layer]
+tags: [Network]
 comments: true
 ---
 
