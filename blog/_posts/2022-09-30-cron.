@@ -1,0 +1,25 @@
+---
+layout: post
+title: Linux 작업 스케줄링(Cron)
+subtitle: 프로세스 명령어
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [Linux]
+comments: true
+---
+
+## crond
+- 예약 작업 관리
+- 관리자가 원하는 작업을 예약해 두고 <b style="color:red">정해진 시간에 주기적으로 반복하여 실행</b>할 수 있다.
+- crond 라는 데몬이 설치되어 있어야 하며, 대부분의 리눅스는 기본적으로 설치되어 있다.
+- <b>주기적인 서버의 백업이나 로그를 관리할 때 유용</b>
+- /var/log/cron 파일을 통해 cron 데몬의 로그를 확인할 수 있다.
+- /var/spool/cron/ 디렉터리 밑에 각 사용자명과 같은 이름으로 생성
+
+## 확인
+
+![cron1](../assets/img/cron1.png)
+
+![cron2](../assets/img/cron2.png)
+
