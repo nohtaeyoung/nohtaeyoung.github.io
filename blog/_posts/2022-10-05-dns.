@@ -9,3 +9,166 @@ tags: [Web]
 comments: true
 ---
 
+## TCP/IP 초기 네트워크 시스템 접근
+- 다른 시스템에 접근할 때 <b style="color:red">IP주소(숫자 형태)</b>를  이용하여  접근 한다.
+- 다수의 목적지 시스템이 생겨나면서 사용자가 직접 시스템의 주소를 기억하기 힘들어 졌다.
+- 사용자가 쉽게 기억할 수 있는 <b style="color:red">문자 형태의 값</b>을 사용 한다. -> hostname
+
+## hosts 파일
+- 특정 IP주소로 정의되어 있는 도메인 주소에 대한 정보를 보관하는 로컬 파일 -> 이름 해석
+- 사용자가 직접 기억하지 못하는 다수의 hostname과 IP주소의 쌍을 지정하는 시스템 파일
+- SRI-NIC(Network Information Center)에서 관리하며 ㅈ기적으로 배포했다(현재는 X)
+
+![dns1](../assets/img/dns1.png)
+
+
+## Linux hosts 설정 파일
+- <b>/etc/hosts</b>
+
+![dns2](../assets/img/dns2.png)
+
+## hosts 파일 문제점
+- 급격히 증가하는 호스트에 대한 관리 문제가 발생 한다.
+- 파일의 크기가 증가하면서 업데이트 시 트래픽을 증가 시킨다.
+- <b style="color:red">호스트의 정보가 갱신될 때 마다 모든 호스트가 파일을 업데이트 해야 한다.</b>
+- <b style="color:red"> 해결책 -> DNS(Domain Name System)</b>
+
+## DNS (Domain Name System)
+- hosts파일을 통한 주소 해석의 한계를 해결하기 위해 1983년에 개발 되고 1984년 도입된 시스템
+- iIP주소에 해당하는 문자 형태의 주소(도메인 이름)를 해석하기 위한 일련의 시스템 구조 및 동작
+- <b style="color:red">Server에서 해석에 관련된 모든 Data를 가지고 있고 Client의 질의가 있을 때 응답</b> 한다.
+- 네트워크 시스템이 복잡해 지면서 주소의 체계적인 구조가 필요하게 됐다. -> <b style="color:red">계층적인 Tree 구조 형태</b>
+  - 상위 도메인은 하위 도메인에 대한 정보만 유지/제공 한다.
+  - 분산 데이터베이스 시스템 -> 확장성 제공
+- 체계적인 관리를 통해 이름의 중복이 발생하지 않도록 관리 한다. -><b style="color:red">유일성 유지</b>
+- TCP/UDP port 53
+  - TCP port 53 -> 영역 전송(Zone Transfer)
+  - UDP port 53 -> 일반 질의
+
+## Domain
+- <b style="color:red">논리적인 하나의 관리 영역</b>
+- 각 도메인은 해당하는 도메인 이름(Domain Name)을 가진다 -> <b style="color:red">DNS Zone</b>
+
+## Domain 주소 형식
+- 주소의 영역을 옥텟(.)으로 구분한다. -> 라벨(label)
+  - 하나의 라벨은 최대 63개의 문자(63byte)크기를 가진다
+  - 대소문자 구분 없이 알파벳, 숫자, - 만 가능 하다 -> ASCII로 표현 한다.
+  - root는 크기 0인 NULL 문자
+- 전체 도메인 주소의 최대 크기 -> 255 문자(255byte)
+- 오른쪽에서 왼쪽으로 나열 한다. -> 최상위 주소는 항상 .(root)
+
+![dns2](../assets/img/dns3.png)
+
+## Name Space
+- Domain 주소의 계층적인 구조
+- 확장성과 유연성을 제공할 수 있도록 구조화 되어 있다.
+- 위임 체계를 기반으로 분산 구조를 형성 한다.
+- 표준 관리 기관 -> IANA(Internet Assigned Numbers Authority)
+  - 각 대륙 별 산하 관리 기관 -> RIR(Regional Internet Registry)
+  - RIR에서 각 국가별 관리 권한 위임
+- 국내 관리 기관 -> KISA 산하의 KRNIC
+
+
+![dns4](../assets/img/dns4.png)
+
+## Name Space 구조
+- Root Domain -> 최상위 도메인 -> 2차 도메인 -> 서브 도메인 -> ...
+
+![dns5](../assets/img/dns5.png)
+
+- 루트 도메인 (Root Domain)
+  - NAME Space에서 이름 해석의 출발지 역할을 수행하는 서버
+  - 최상위 도메인 서버의 정보를 가지고 있다.
+  - 전 세계에 13개의 원본 root 서버가 존재한다.
+
+- 최상위 도메인 (Top Level Domain = TLD)
+  - 지정학적 분류, 기관 유형 분류 등
+  - 국가 코드 최상위 도메인(country code TLD = ccTLD)
+    - .kr, .jp, .cn, .us, .uk
+  - 일반 최상위 도메인(generic TLD = gTLD)
+    - Generic gTLD -> .net, .com, .org ...
+    - Sponsored gTLD -> .areo, .asia, .edu, .gov, .int ...
+    - Generic-Restricted gTLD -> .biz, .name, .pro ...
+  - 국제화된 국가코드 최상위 도메인(internationalized country code TLD = IDN ccTLD)
+    - 한글 도메인 등
+  - ARPA
+    - 역방향 도메인을 해석할 때 사용되는 최상위 도메인 -> in-addr.arpa
+
+- 2차 도메인(Second Lever Domain, Sub Domain)
+  - TLD 하위에서 관리되는 서브 도메인
+  - 국가 도메인 하위에 기관 유형별 분류
+    - co(일반회사), ac(교육기관), re(연구기관), go(정부기관), nm(네트워크 관리) ...
+- 서브 도메인 (Sub Domain)
+  - 상위 도메인에 소속되는 각 기관 또는 회사별 도메인
+  - 하위 도메인으로 호스트 또는 내부 조직 도메인이 구성될 수 있다.
+    - google, naver, daum ...
+
+![dns6](../assets/img/dns6.png)
+
+## 리졸버 (Resolver)
+- 도메인 주소 해석을 수행하는 작은 프로그램
+  - OS에 기본적으로 탑재되어 있는 S/W 라이브러리 형태의 루틴
+  - Application의 도메인 주소 해석 요청을 처리 한다.
+- 리졸버에 정의되어 있는 순서대로 도메인 주소 해석을 처리한다.
+  - <b style="color:red">Client: Hosts 파일 -> DNS Cache -> DNS server에게 질의(또는 해석 실패)</b>
+  -  <b style="color:red">Server : Zone 파일 -> DNS Cache -> 반복 질의(또는 해석 실패)</b>
+
+![dns7](../assets/img/dns7.png)
+
+## 네임 서버(Name Server)
+- 클라이언트의 요청에 대한 이름해석 결과를 전달하는 시스템
+  - Name Space에 관련된 Resource Record를 저장하고 있는 서버
+- <b style="color:red">Domain 정보 Database = Zone File</b>
+  - 서버가 동작하면서 Zone File에 등록된 RR 정보를 메모리에 데이터베이스 구조로 저장 한다.
+
+![dns8](../assets/img/dns8.png)
+
+## 네임 서버(Name Server) 종류
+- 주 네임 서버(Master Name Server, Primary Name Server)
+  - Zone Database를 직접 구성하는 서버
+  - Zone Database에 대한 구너한을 가지고 있는 서버
+
+- 보조 네임 서버(Slave Name Server, Secondary Name Server)
+  - Master(primary) Name Server의 Zone에 대한 정보만 동기화 받는다.
+  - 주기적인 동기화과정을 통해 Master 서버와 동일한 정보를 유지한다.
+- 다수의 보조 네임 서버를 운영할 수 있다.
+
+- 전달자(Forwarder)
+  - 실제 Zone에 대한 정보를 가지고 있지 않지만 클라이언트의 요청을 대신 해석하는 역할을 수행하는 서버
+
+## Zone 저옵 동기화(Zone Transfer) = 영역 전송
+- 마스터 네임서버에서 구성된 Zone 정보를 보조 네임서버가 복사하여 정보를 동일하게 유지하는 과정
+  - 동기화 크기가 클 경우 압축을 수행 한다.
+  - 기본적으로 보조 네임 서버가 먼저 동기화 요청을 한다.
+- TCP port 53 -> 동기화의 신뢰성을 보장한다.
+- 종류 -> AXFR(Authoritative Transfer), IXFR(Incremental Zone transfer)
+
+![dns9](../assets/img/dns9.png)
+
+- AXFR(Authoritative Transfer)
+  - 기본적인 영역 전송 방법
+  - 보조 네임서버가 <b style="color:red">저정된 주기(refresh)에 따라 serial 정보 요청을 전달</b> 한다.
+    - serial 값 -> zone 정보의 갱신, 수정, 삭제 등이 일어났을 때 증가 된다.
+  - 마스터 네임 서버가 zone의 serial 정보를 전달 한다.
+  - 보조 네임서버에서 설정된 serial 보다 증가되었음을 확인하려면 <b style="color:red">zone 전체 종기화(AXFR_)를 요청</b> 한다.
+  - 마스터 네임 서버는 요청받은 <b style="color:red">zone의 모든 정보를 전달</b> 한다.
+  - <b>문제점 -> Refresh의 주기 때문에 동기화 지연 시간이 발생 할 수 있다.</b>
+
+- IXFR(Incremental Zone transfer)
+ - Zone에 대한 <b style="color:red">전체 정보가 아닌 변경된 내용만 전송</b> 받는 동기화 방식
+   - 동기화 과정에서 발생하는 네트워크 트래픽 부하를 줄인다.
+ - Notify 메시지와 함께 사용된다.
+ - 마스터와 보조 네임서버 둘 다 IXFR 방식을 지원해야 한다.
+ - UDP/TCP port 53을 선택적으로 이용할 수 있다.
+
+## Notify
+- 기본적인 AXFR 동기화의 지연 시간 문제점을 해결
+- <B style="color:red">Zone의 변화가(serial 값) 발생하면 마스터 네임 서버가 Notify 메시지 전달</b>
+  - Zone의 변화를 신속하게 동기화 할 수 있다.
+- Notify 메시지를 전달 받으면 마스터 네임 서버에 SOA를 요청한다.
+- 보조 네임서버에서 설정된 SERIAL 보다 증가되었음을 확인하면 zone 동기화(AXFR/IXFR)를 요청 한다.
+- 마스터 네임 서버는 요청 받은 zone의 정보를 전달(AXFR/IXFR) 한다.
+
+
+
+ 
