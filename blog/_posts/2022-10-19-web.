@@ -1,0 +1,108 @@
+---
+layout: post
+title: WEB
+subtitle: 
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [Web]
+comments: true
+---
+
+# WEB 서비스
+## WWW(World Wide Web)
+- 네트워크에 연결된 시스템의 <b style="color:red">정보</b>를 한 위치에서 <b style="color:red">검색</b>할 수 있는 서비스
+- Hyper Text를 통해 정보를 교환하는 서비스라고 정의한다.
+  - 하나의 웹 문서에서 제공하는 <b style="color:red">연결 주소(링크)를 통해 다른 문서로 이동</b>한다.
+
+## WEB version
+- WEB 1.0
+  - 정적인 검색 서비스
+  - 운영자 중심의 서비스
+- WEB 2.0
+  - 동적인 검색 서비스
+  - 사용자 참여, 공유 중심의 서비스
+  - - 예 Wikipedia, naver/google ...
+- WEB 3.0
+  - 시맨틱 웹
+  - 컴퓨터(기계)에 의해 사용자의 패턴을 분석하여 개인별 맞춤 정보 검색 서비스 제공
+  - 예 facebook, instargram
+
+# WEB 1.0 서비스
+## 정적인 검색 서비스
+- 단순한 서버에서 만들어서 제공되는 정보만 공유하고 검색하는 서비스
+- 서버가 제공하는 모든 정보는 WEB master(관리자)에 의해서 생성 되고 체계적으로 분류 된다.
+- 사용자들은 WEB master가 제공하는 카테고리에서 분류된 자료를 검색 한다.
+
+![web1](../assets/img/web1.png)
+
+## 정적 검색 서비스
+- 단순히 서버에서 만들어서 제공되는 정보만 공유하고 검색하는 서비스
+- 서버가 제공하는 모든 정보는 WEB master(관리자)에 의해서 생성 되고 체계적으로 분류 된다.
+- 사용자들은 WEB master가 제공하는 카테고리에서 분류된 자료를 검색 한다.
+
+![web3](../assets/img/web3.png)
+
+# WEB 2.0 서비스
+## 동적 검색 서비스
+- "참여, 공유, 개방"이라는 요소를 목적으로 사용자가 생성한 정보를 서버가 수집하여 다른 사용자에게 제공하는 서비스
+- 클라이언트에서 전달되는 정보를 저장하여 다른 사용자에게 공유 한다.
+  -  클라이언트의 정보를 동적으로 처리할 수 있는 기능이 추가됐다. -> <b style="color:red">WAS(Web Application Server)</b>
+
+![web2](../assets/img/web2.png)
+
+![web4](../assets/img/web4.png)
+
+# WEB 구성 요소 - System
+## WEB Client (WEB Browser)
+- WEB Service를 위한 사용자 인터페이스를 제공
+- 사용자가 지정한 정보로 WEB 요청 데이터(HTTP Request)를 생성하고 전달받은 응답 데이터(HTTP Response)를 파싱하여 화면에 출력 한다.
+  - 사핑(parsing) -> 데이터를 분석하여 원하는 형태로 추출하는 행위
+- 종류
+  - 예 Internet Explorer(Microsoft Edge), Chrome, Firefox, Opera, Safari ...
+
+## WEB Server
+- WEB Client가 전달한 요청(HTTP Request)을 해석하여 사용자가 요구하는 WEB page(HTML data)를 응답(HTTPD Response)gksms tltmxpa
+- 정적인 요청에 대한 요청만 처리할 수 있다. -> HTML 요청
+- 동적인 요청이 전달되면 WAS에게 처리를 맡기고 처리 결과에 대해서 HTTP응답을 생성 한다. -> SSS 요청
+- 종류
+  - IIS(Internet Information Server), Apache, Netscape, NginX ...
+
+## WAS(Web Application Server)
+- WEB 2.0에서 사용자가 전달하는 데이터를 서버 측에서 처리하기 위해 개발한 서버 프로그램
+  - 사용자가 전달한 값(사용자의 입력 값)을 기반으로 프로그램의 동작이 달라 진다. -> <b style="color:red">동적인 서비스</b>
+- 정적 웹 서버 프로그램과 후면 프로그램(Database) 사이에서 상호 연동 역할을 수행 했다.
+  - 사용자의 입력 값 -> 정적 서버가 추출 후 WAS에 전달 -> WAS의 명령 코드에 따라 Database에 전달 된다. -> Database의 처리결과가 WAS에 전달 된다. -> 처리 결과에 맞는 응답 데이터 구성 -> 결과를 사용자에게 전달 한다.
+- 종류
+  - .net application Server(ASP), PHP(hypertext Prprocessor), Tomcat(JSP)...
+
+## Database (DBMS, DataBase Manaement System)
+- 데이터베이스를 생성, 관리, 사용, 제어하는 프로그램
+  - 데이터베이스 내의 데이터에 접근할 수 있도록 해주는 인터페이스 프로그램
+- 데이터의 효율적인 관리와 제에를 제공 한다.
+- 종류
+  - MS-SQL, My-SQL, Oracle ...
+
+# WEB 구성 요소 - Language
+## HTML (Hyper Text Markup Language)
+- <b style="color:red">WEB data(WEB page) 생성을 위해 사용되는 hypertext를 구성하는 마크업 언어</b>
+- Hyper Text
+  - Hyper Link를 통해 구성된 다른 정보로 쉽게 연결시켜주는 구조화된 문서
+    - Hyper Link -> 특정 정보의 시작 시점을 알리는 표식
+  - node -> 정보(웹 페이지)
+  - link -> node를 연결하는 고리
+  - Depth -> 상위 node에서 현재 node까지의 경로 수
+  - jump -> 선택에 따라 링크를 통해 다음 node로 이동
+- 마크업(Markup) 언어
+  - 태그 등을 이용하여 문서나 데이터의 구조를 정의하는 언어
+- 태크 (tag)
+  - 특정 데이터의 의미, 값을 표현하기 위한 식별자
+
+## CSS(Client Side Script)
+- Client에서 웹 페이지를 동적으로 표현하기 위해 사용되는 스크립트 언어
+- Client에서 처리되는 명령이므로 서버가 source code 원형을 전달 한다.
+- 한번 parsing 동작을 거친 data에 재 접근하여 추가 동작을 지원한다.
+- 기존의 HTML로 수행될 수 없는 추가 동작을 지원 한다.
+- 종류
+  - JAVASCRIPT,VISUAL BASIC SCRIPT, JSCRIPT..
+
