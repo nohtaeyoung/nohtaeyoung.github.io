@@ -1,0 +1,84 @@
+---
+layout: post
+title: DB 5
+subtitle: Transaction, variadble
+gh-repo: nohtaeyoung/nohtaeyoung.github.io
+gh-badge: [star, fork, follow]
+cover-img: /assets/img/security.jpg
+tags: [Database]
+comments: true
+---
+
+{: .box-note}
+<b>블로그 내의 모든 예시와 실습은 VMware workstation16.2.3, Centos7을 활용 합니다.<br></b>
+
+## 트랙잭션(Transaction)
+- 한꺼번에 수행되어야 할 <b stylae="color:red">최소 작업 단위</b>
+- 논리적 작업 단위(LUW, Logical Units of Work)
+- 모든 작업은 반드시 한꺼번에 완료가 되야 하며 그렇지 않은 경우에는 한꺼번에 취소되어야 한다.
+- 사용자가 시스템에 요구를 시작하여 시스템 내의 처리, 시스템에서 사용자에게 응답하는 모든 처리를 포함
+
+![db7_1](../assets/img/db7_1.png) 
+
+## 트랜잭션 기술적 요건(ACID)
+- <b>원자성(Atomicity)</b>
+  - 분리할 수 없는 하나의 단위로 작업은 모두 완료되거나 모두 취소되어야 한다.
+  - 트랙잭션의 처리가 취소된 경우 전혀 이루어지지 않은 것과 같아야 한다.
+  - 작업 중 에러가 발생되면 <b style="color:red">rollback(되돌리기)</b>
+- <b>일관성(Consistency)</b>
+  - 트랜잭션들간의 영향이 한 방향으로만 전달되어야 한다.
+  - 오류 없이 유효한 데이터만 저장되어야 한다.
+- <b>고립성(Isolation)</b>
+  - 트랜잭션이 완료되기 전까지 다른 트랜잭션에 영향을 주어선 안된다.
+  - 접근하고 있는 데이터는 다른 트랜잭션으로부터 격리 되어야 한다.
+- <b>영구성(Durability)</b>
+  - 트랜잭션이 완료된 경우 다른 시스템 고장이나 네트워크 장애 등으로 데이터가 유실되지 않고 정상적으로 기록되어야 한다.
+  - 작업이 완료되면 <b style="color:red">commit(적용)</b>
+
+## 트랜잭션 범위
+- 로컬 트랜잭션(local transaction)
+  - 단위 시스템에서 처리되는 트랜잭션으로 트랜잭션에 대한 관리를 DBMS에서 담당
+- 분산 트랜잭션
+  - 여러 개의 시스템에서 처리되는 트랜잭션
+  - 여러 DBMS에 걸친 트랜잭션을 담당하는 경우도 많아서 주로 미들웨어(middleware)에서 트랜잭션 관리를 담당
+
+## 트랜잭셔널 데이터베이스
+- 트랜잭션을 지원하는 데이터베이스
+- 현재 대부분의 관계형 데이터베이스 관리시스템은 트랜잭션 데이터베이스 지원
+
+## 트랜잭셔널 파일시스템
+- 트랜잭션을 지원하는 파일시스템
+- 리눅스의 Namesys Reiser4 파일 시스템과 마이크로소프트 NTFS 새로운 버전은 모두 트랜잭션을 지원
+
+## mariadb 트랜잭션
+- MyISAM/MEMORY/MERGE 엔진은 트랜잭션이 지원이 안된다.
+- <b style="color:red">InnoDB 엔진만 지원</b>
+- mysql은 명령어 수행 시 자동으로 commit 하도록 외어 있다.
+
+## 트랜잭션 SQL
+- 트랜잭션에 사용되는 SQL은 DCL에 포함되지만 따로 TCL(Transaction Control Language)로 분류하기도 한다.
+
+|SQL|설명|
+|:----------|:----------:|
+|<b>commit</b>|트랜잭션 작업이 정상 완료되었음<br>변경 내용을 영구 적용<br>모든 SAVEPINT 삭제|
+|<b>savepoint (savepoint명)</b>|현재 트랜잭션 작업 시점에 이름 지정<br>하나의 트랜잭션 안에서 구역을 나눌 수 있다.|
+|<b>rollback</b>|트랜잭션 작업을 모두 취소하고 최근 commit 시점으로 이동|
+|<b>rollback to (savepint명)</b>|지정된 savepoint 까지의 트랜잭션 작업을 취소하고 savepoint 시점으로 이동|
+
+## 트랜잭션 시작 알림
+- Mariadb는 기본 autocommit 기능이 활성화 되어 있기 때문 SQL 입력 시 자동 commit 된다.
+- 임시로 autocommit 사용하지 않도록 설정한다.
+- 하나의 트랜잭션 작업이 끝나면(commit 이나 rollbcak) 설정 삭제 된다.
+  - 트랜잭션 작업을 다시 하기 위해서는 새로운 시작을 알려줘야 한다.
+- <b style="color:red">mariadb> start transaction;</b>
+
+![db7_2](../assets/img/db7_2.png) 
+
+## 트랜잭션 작업
+- 테이블에 데이터 추가 후 확인(bns)
+
+![db7_3](../assets/img/db7_3.png)
+
+- Mariadb 새로운 접속 연결 후 데이터 확인
+  - 새로운 터미널에서 mariadb 하나 더 접속하기
+
