@@ -81,4 +81,11 @@ comments: true
 
 - Mariadb 새로운 접속 연결 후 데이터 확인
   - 새로운 터미널에서 mariadb 하나 더 접속하기
+  - <b style="color:red">데이터 추가는 안된다.</b>
+
+## 트랜잭션 작업 - savepoint
+- savepoint 지정
+  - <b style="color:red">mariadb> savepoint (savepoint명);</b>
+  - 트랜잭션 작업중인 터미널에서 데이터 추가 후 확인
+  
 
