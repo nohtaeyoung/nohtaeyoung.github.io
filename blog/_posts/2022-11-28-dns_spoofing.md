@@ -1,7 +1,7 @@
 ---
 layout: post
 title: DNS Spoofing
-subtitle:Client Cache Poisoning
+subtitle: Client Cache Poisoning
 gh-repo: nohtaeyoung/nohtaeyoung.github.io
 gh-badge: [star, fork, follow]
 cover-img: /assets/img/security.jpg
